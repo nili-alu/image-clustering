@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Clustering</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/x-icon" href="data:image/x-icon;,">
+</head>
+
+<body>
+  <div class="heading">
+    <h1>ALU Rwanda Campus</h1>
+    <h1>Data Mining course</h1>
+    <h2>Knowledge check on clustering</h2>
+    <h2>Image Clustering</h2>
+  </div>
+
+  <div id="image-container"></div>
+
+  <script>
+    const accessKey = 'woGpn0NpTvVjB3rnJXPjoITzQsLjvZ1NLKF2RNT0icw';
+
+    window.onload = () => {
+      clusterImages();
+    };
+
+    async function fetchImages() {
+      const response = await fetch(`https://api.unsplash.com/photos/random/?client_id=${accessKey}&count=20`);
+      const data = await response.json();
+      console.log('API Response:', data);
+      return data.map(img => img.urls.regular);
+    }
+
+    function clusterImages() {
+      fetchImages().then(images => {
+        // Perform clustering (k-means for images)
+        const k = 5; // Number of clusters
+        const imageClusters = kMeansClustering(images, k);
+
+        // Display image clusters on the web page
+        displayImageClusters(imageClusters);
+      });
+    }
+
+    function kMeansClustering(data, k) {
+      // Dummy k-means clustering (replace with a proper algorithm)
+      const clusters = Array.from({ length: k }, () => []);
+      for (let i = 0; i < data.length; i++) {
+        const clusterIndex = i % k;
+        clusters[clusterIndex].push(data[i]);
+      }
+      return clusters;
+    }
+
+    function displayImageClusters(clusters) {
+      const container = document.getElementById('image-container');
+      container.innerHTML = ''; // Clear previous clusters
+
+      clusters.forEach((cluster, index) => {
+        const clusterDiv = document.createElement('div');
+        clusterDiv.className = 'cluster';
+        clusterDiv.innerHTML = `<h3>Cluster ${index + 1}</h3>`;
+
+        cluster.forEach(item => {
+          const img = document.createElement('img');
+          img.src = item;
+          img.alt = 'Clustered Image';
+          img.style.width = '100px';
+          img.style.height = '100px';
+
+          clusterDiv.appendChild(img);
+        });
+
+        container.appendChild(clusterDiv);
+      });
+    }
+  </script>
+</body>
+
+</html>

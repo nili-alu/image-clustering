@@ -1,0 +1,54 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+#controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.cluster {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 250px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.cluster img {
+    width: 100px;
+    /* Adjust the width to your preference */
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.cluster p {
+    margin: 0;
+    color: #666;
+}
+
+.heading {
+    flex: content;
+    display: flex;
+    -ms-flex-item-align: center;
+    flex-direction: column;
+    margin-left: 350px;
+}
